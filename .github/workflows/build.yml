@@ -18,11 +18,10 @@ jobs:
     - name: Generate deployment package
       run: zip -r deploy.zip . -x '*.git*'
     
-    - name: Upload file 'DEPLOY.ZIP' as an artifact
+    - name: Upload file 'Dockerrun.aws.json' as an artifact
       uses: actions/upload-artifact@v1
       with:
-          name: deploy.zip
-          path: deploy.zip
+          path: Dockerrun.aws.json
   
   Push_to_registry:
 
@@ -59,10 +58,10 @@ jobs:
 
     steps:
 
-    - name: Download file 'DEPLOY.ZIP' from artifact
+    - name: Download file 'Dockerrun.aws.json' from artifact
       uses: actions/download-artifact@v1
       with:
-        name: deploy.zip
+        name: Dockerrun.aws.json
 
     - name: Deploy to EB
       uses: einaregilsson/beanstalk-deploy@v14
