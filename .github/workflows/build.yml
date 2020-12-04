@@ -49,10 +49,11 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: dschuemann/docker-react:latest
+          tags: dschuemann/multi-docker-react:latest
 
   Deploy_on_EBS:
 
+    name: Deploy to AWS Elastic Bean Stalk
     runs-on: ubuntu-latest
     needs: [Build, Push_to_registry]
 
@@ -68,8 +69,8 @@ jobs:
       with:
         aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
         aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
-        application_name: docker-react-test
-        environment_name: DockerReactTest-env
+        application_name: multi-docker-react
+        environment_name: multi-docker-react-env
         version_label: 1.0
         region: us-west-2
         deployment_package: deploy.zip
