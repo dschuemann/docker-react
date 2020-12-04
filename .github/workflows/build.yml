@@ -17,6 +17,11 @@ jobs:
     - name: Generate deployment package
       run: zip -r deploy.zip . -x '*.git*'
 
+  Deploy:
+
+    runs-on: ubuntu-latest
+    
+    steps:  
     - name: Deploy to EB
       uses: einaregilsson/beanstalk-deploy@v14
       with:
