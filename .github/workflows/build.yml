@@ -2,7 +2,7 @@ name: docker-react
 on: push
 
 jobs:
-  Build:
+  Build_and_Test_image:
 
     runs-on: ubuntu-latest
 
@@ -22,11 +22,25 @@ jobs:
       with:
           name: deploy.zip
           path: deploy.zip
+  
+  Push_to_registry:
+    name: Push Docker image to Docker Hub
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      - name: Push to Docker Hub
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: dschuemann/docker-react
+          tag_with_ref: true
 
-  Deploy:
+  Deploy_on_EBS:
 
     runs-on: ubuntu-latest
-    needs: Build
+    needs: [Build_and_Test_image, Push_to_registry]
 
     steps:
 
