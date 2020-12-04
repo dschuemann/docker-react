@@ -7,5 +7,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: just echo a message
-      run: echo Hello there!
+    - name: Build Test Image
+      run: docker build -t dschuema/docker-react -f Dockerfile.dev .
+
+    steps:
+    - name: Test Image
+      run: docker run -e CI=true dschuema/docker-react npm run test
