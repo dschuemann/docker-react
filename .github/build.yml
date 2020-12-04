@@ -1,0 +1,8 @@
+name: docker-react
+on: push
+
+steps:
+  - name: Test Printing Something
+    env:
+      ENV_NAME: Dustin
+    run: echo "My name is: {$ENV_NAME}"
