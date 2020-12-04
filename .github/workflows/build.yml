@@ -21,6 +21,7 @@ jobs:
     - name: Upload file 'Dockerrun.aws.json' as an artifact
       uses: actions/upload-artifact@v1
       with:
+          name: Dockerrun.aws.json
           path: Dockerrun.aws.json
   
   Push_to_registry:
