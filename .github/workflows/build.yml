@@ -16,6 +16,12 @@ jobs:
 
     - name: Generate deployment package
       run: zip -r deploy.zip . -x '*.git*'
+    
+    - name: Upload file 'DEPLOY.ZIP' as an artifact
+      uses: actions/upload-artifact@v1
+      with:
+          name: deploy.zip
+          path: deploy.zip
 
   Deploy:
 
@@ -23,8 +29,11 @@ jobs:
     needs: Build
 
     steps:
-    - name: Generate deployment package
-      run: zip -r deploy.zip . -x '*.git*'
+
+    - name: Download file 'DEPLOY.ZIP' from artifact
+      uses: actions/download-artifact@v1
+      with:
+        name: deploy.zip
 
     - name: Deploy to EB
       uses: einaregilsson/beanstalk-deploy@v14
