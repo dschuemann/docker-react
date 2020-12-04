@@ -1,13 +1,18 @@
 {
-    "AWSEBDockerrunVersion": 2,
-    "containerDefinitions": [
-      {
-        "name": "client",
-        "image": "dschuemann/multi-docker-react",
-        "hostname": "client",
-        "essential": false,
-        "memory": 128
-      }
-    ]
-  }
-  
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "client",
+      "image": "dschuemann/multi-docker-react",
+      "hostname": "client",
+      "essential": true,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "memory": 128
+    }
+  ]
+}
